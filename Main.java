@@ -1,53 +1,36 @@
 // STUDENT NAME: Rafael Castro
-// DATE: 
+// DATE: 2 July 2026
 
-public class JulianDayNumber 
-{
-
-    public static int calculateJDN(int month, int day, int year) 
-	{
-        int a = (14 - month) / 12;
-        int y = year + 4800 - a;
-        int m = month + 12 * a - 3;
-
-        return day
-                + (153 * m + 2) / 5
-                + 365 * y
-                + y / 4
-                - y / 100
-                + y / 400
-                - 32045;
-    }
+public class Main {
 
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
 
-        System.out.print("Enter month: ");
-        int month = input.nextInt();
+        int todayMonth = 2, todayDay = 2, todayYear = 2020;
+        int bdayMonth = 8, bdayDay = 26, bdayYear = 1918;
 
-        System.out.print("Enter day: ");
-        int day = input.nextInt();
+        int jdnToday = calculateJDN(todayMonth, todayDay, todayYear);
+        int jdnBirthday = calculateJDN(bdayMonth, bdayDay, bdayYear);
 
-        System.out.print("Enter year: ");
-        int year = input.nextInt();
+        int dayDifference = jdnToday - jdnBirthday;
+        int approxAge = dayDifference / 365; // Integer division for age in years
 
-        int jdn = calculateJDN(month, day, year);
+        System.out.printf("Julian Day Number for today's date, %d/%d/%d, is %d%n%n",
+                todayMonth, todayDay, todayYear, jdnToday);
 
-        System.out.println("Julian Day Number: " + jdn);
+        System.out.printf("Julian Day Number for birthday, %d/%d/%d, is %d%n%n",
+                bdayMonth, bdayDay, bdayYear, jdnBirthday);
 
-        input.close();
+        System.out.printf("The difference in days is %d, which makes you approximately %d years old!%n",
+                dayDifference, approxAge);
     }
-}
-		/***** DECLARATION SECTION *****/
 
-		/***** INITIALIZATION SECTION *****/
-		
-		/***** INPUT SECTION *****/
-		// N/A (no input for this lab)
-		
-		/***** CALCULATION & PROCESSING SECTION *****/
+    public static int calculateJDN(int month, int day, int year) {
+        int a = (14 - month) / 12;
+        int y = year + 4800 - a;
+        int m = month + (12 * a) - 3;
 
-		
-		/***** OUTPUT SECTION *****/
-  }
+        int jdn = day + ((153 * m + 2) / 5) + (365 * y) + (y / 4) - (y / 100) + (y / 400) - 32045;
+
+        return jdn;
+    }
 }
